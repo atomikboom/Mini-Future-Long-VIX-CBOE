@@ -35,9 +35,14 @@ const getPropsJson = (html: string): any => {
 
 export const fetchBnpTopFields = async (): Promise<BnpTopFields> => {
   const customProxy = import.meta.env.VITE_BNP_PROXY_URL as string | undefined;
-  const urls = customProxy
+  const localProxyCandidates = ["/vix-proxy", "/api/vix-proxy"];
+  const customUrls = customProxy
     ? [`${customProxy}${customProxy.includes("?") ? "&" : "?"}url=${encodeURIComponent(BNP_URL)}`]
-    : defaultProxies;
+    : [];
+  const localUrls = localProxyCandidates.map(
+    (p) => `${p}${p.includes("?") ? "&" : "?"}url=${encodeURIComponent(BNP_URL)}`,
+  );
+  const urls = [...customUrls, ...localUrls, ...defaultProxies];
 
   let html = "";
   for (const url of urls) {
