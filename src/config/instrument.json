@@ -1,0 +1,17 @@
+{
+  "isin": "NLBNPIT31OG6",
+  "name": "Mini Future Long VIX CBOE",
+  "priceRef": 8.1,
+  "lastTrade": 7.94,
+  "minOggi": 7.79,
+  "maxOggi": 10,
+  "maxAnno": 10.78,
+  "minAnno": 6.23,
+  "leverage": 2.43,
+  "strike": 11.79,
+  "knockOut": 12.97,
+  "fxRate": 1.09,
+  "scadenza": "28/12/2035",
+  "lastUpdate": "04/03/2026 21:59",
+  "expired": false
+}
