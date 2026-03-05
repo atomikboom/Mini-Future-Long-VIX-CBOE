@@ -34,9 +34,14 @@ const writeCache = (data: LivePayload): void => {
 
 export const fetchVIXLive = async (): Promise<LivePayload> => {
   const customProxy = import.meta.env.VITE_VIX_PROXY_URL as string | undefined;
-  const urls = customProxy
+  const localProxyCandidates = ["/vix-proxy", "/api/vix-proxy"];
+  const customUrls = customProxy
     ? [`${customProxy}${customProxy.includes("?") ? "&" : "?"}url=${encodeURIComponent(YF_URL)}`]
-    : defaultProxies;
+    : [];
+  const localUrls = localProxyCandidates.map(
+    (p) => `${p}${p.includes("?") ? "&" : "?"}url=${encodeURIComponent(YF_URL)}`,
+  );
+  const urls = [...customUrls, ...localUrls, ...defaultProxies];
 
   let json: any = null;
   for (const url of urls) {
